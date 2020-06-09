@@ -92,13 +92,15 @@ S_45 = [Spisok4, Spisok5]
 
 for i in range (len(Spisok4)):
     for j in range (len(S_45)):
-        _=active_sheet2.cell(column=j+1, row=i+1, value=S_45[j][i])
+        _=active_sheet2.cell(column=j+2, row=i+1, value=S_45[j][i])
 
 #применение форматирование
 style_1 = Font(name='Calibri', color=colors.BLUE,
                bold=True, size=12, underline='double')
 style_2 = Font(name='Calibri', color=colors.RED,
                bold=True, size=10, underline='single')
+style_3 = Font(name='Calibri', color=colors.RED,
+               bold=True, size=14, underline='double')
 
 #отформатируем шапку
 a1 = active_sheet2['A1']
@@ -108,15 +110,19 @@ b1.font = style_1
 
 #далее отформатируем остальную часть таблицы
 for i in range(2,6):
-    a = active_sheet2['A' + str(i)]
-    b = active_sheet2['B' + str(i)]
+    a = active_sheet2['B' + str(i)]
+    b = active_sheet2['C' + str(i)]
     a.font = style_2
     b.font = style_2
 
 #применем формулу СУММА
-active_sheet2["A6"] = '=SUM(A1:A5)'
+active_sheet2["A6"] = 'СУММА:'
 active_sheet2["B6"] = '=SUM(B1:B5)'
+active_sheet2["C6"] = '=SUM(C1:C5)'
 
+a6 = active_sheet2['A6']
+a6.font = style_3
+# print(active_sheet2["A6"])
 
 active_excel.save('МойТест_3.xlsx') #сохраняем все изменения
 print('ИЗМЕНЕНИЯ СОХРАНЕНЫ')
