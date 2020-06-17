@@ -92,7 +92,7 @@ S_45 = [Spisok4, Spisok5]
 
 for i in range (len(Spisok4)):
     for j in range (len(S_45)):
-        _=active_sheet2.cell(column=j+2, row=i+1, value=S_45[j][i])
+        _=active_sheet2.cell(column=j+2, row=i+2, value=S_45[j][i])
 
 #применение форматирование
 style_1 = Font(name='Calibri', color=colors.BLUE,
@@ -109,19 +109,38 @@ a1.font = style_1
 b1.font = style_1
 
 #далее отформатируем остальную часть таблицы
-for i in range(2,6):
+for i in range(2,7):
     a = active_sheet2['B' + str(i)]
     b = active_sheet2['C' + str(i)]
     a.font = style_2
     b.font = style_2
 
 #применем формулу СУММА
-active_sheet2["A6"] = 'СУММА:'
-active_sheet2["B6"] = '=SUM(B1:B5)'
-active_sheet2["C6"] = '=SUM(C1:C5)'
+active_sheet2["A7"] = 'СУММА:'
+active_sheet2["B7"] = '=SUM(B1:B6)'
+active_sheet2["C7"] = '=SUM(C1:C6)'
 
-a6 = active_sheet2['A6']
+a6 = active_sheet2['A7']
 a6.font = style_3
+
+#применим формулу макс - мин
+active_sheet2["A8"] = 'МАКС:'
+active_sheet2["B8"] = '=max(B1:B6)'
+active_sheet2["C8"] = '=max(C1:C6)'
+
+a7 = active_sheet2['A8']
+a7.font = style_3
+
+#применим формулу среднее значение
+active_sheet2["A9"] = 'СрЗнач:'
+active_sheet2["B9"] = '=average(B1:B6)'
+active_sheet2["C9"] = '=average(C1:C6)'
+
+a8 = active_sheet2['A9']
+a8.font = style_3
+
+
+
 # print(active_sheet2["A6"])
 
 active_excel.save('МойТест_3.xlsx') #сохраняем все изменения
