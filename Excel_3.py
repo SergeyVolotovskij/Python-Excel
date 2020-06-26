@@ -1,7 +1,9 @@
 #импортируем необходимые библиотеки
-from openpyxl import workbook
-from openpyxl.styles import Font, Color, colors
 from openpyxl import load_workbook
+from openpyxl import Workbook
+from openpyxl.chart import BarChart,Reference,Series,LineChart,ScatterChart
+from openpyxl.styles import Font, Color, colors
+from openpyxl.utils import get_column_letter
 
 #для удобства указали название файла
 filename = 'МойТест_3.xlsx'
@@ -194,6 +196,19 @@ for i in range(2, 7):
     _.number_format='#,#0.0'
     _=active_sheet2.cell(column=i, row=(len(Spisok4)+3), value=mm)
 
+#встроим граффик
+for j in range (len(S_45)):
+    values = Reference(active_sheet2, min_col=j+2, min_row=2, max_col=j+2, max_row=1 +
+                       len(Spisok4))
+    chart = LineChart()
+    chart.title = "Chart- " + str(j+1)
+    chart.y_axis.title = "Size"
+    chart.y_axis.title = "Number- " + str(j+1)
+    chart.add_data(values)
+    if j<int(len(S_45)/2):
+        active_sheet2.add_chart(chart, get_column_letter(20)+str((j+2) + j*14))
+    else:
+        active_sheet2.add_chart(chart, get_column_letter(30)+str((j-int(len(S_45)/2)+2)+(j-int(len(S_45)/2))*14))
 
 for i in range(7,10):
     a = active_sheet2['B' + str(i)]
